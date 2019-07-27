@@ -1,0 +1,52 @@
+master:
+$un='oconnors_db'; //username
+$pw='test123'; //password
+
+INSERT INTO bookingData (numGuests, inDate, outDate, inStatus, paymentType, discount, guestName) VALUES (4, "2014-02-02", "2014-02-05", 'No', 'Cash', 'No', 'David')
+
+
+
+"INSERT INTO bookingData (numGuests, inDate, outDate, inStatus, paymentType, discount, guestName) VALUES" .
+      "('$numGuests', '$inDate', '$outDate', 'No', '$paymentType', 'No', '$guestName')";
+
+
+<table>
+<tr bgcolor=#f5edd7>
+<td>Room Number</td>
+<td>Room Type</td>
+<td>Max Guests</td>
+<td>Cleaner</td>
+<td>Cost</td>
+</tr>
+<?php
+while($row = mysqli_fetch_array($result4))
+{
+echo "<tr>";
+echo "<td>"; echo $rows["roomNum"]; echo "</td>";
+echo "<td>"; echo $rows["roomType"]; echo "</td>";
+echo "<td>"; echo $rows["maxGuests"]; echo "</td>";
+echo "<td>"; echo $rows["cleaner"]; echo "</td>";
+echo "<td>"; echo $rows["cost"]; echo "</td>";
+echo "</tr>";
+}
+echo "</table>";
+?>
+update bookingData set discount = "Yes" where bookingCode=10; 
+
+"UPDATE bookingData SET discount = '$discountUp' WHERE bookingCode = '$bookingCodeUp'"
+if (isset($_POST['bookingCodeUp'])   &&
+    isset($_POST['discountUp'])      &&
+    isset($_POST['inStatusUp'])      &&
+    !empty($_POST["bookingCodeUp"])&&
+    !empty($_POST["inStatusUp"])&&
+    !empty($_POST["discountUp"]))
+  {
+    $bookingCodeUp   = mysqli_real_escape_string($conn, $_POST['bookingCodeUp']);
+    $discountUp      = mysqli_real_escape_string($conn, $_POST['discountUp']);
+    $inStatusUp      = mysqli_real_escape_string($conn, $_POST['inStatusUp']);
+    $query8       = "INSERT INTO bookings (roomNum, bookingCode) VALUES" . "('$discountUp', '$bookingCodeUp')";
+    $result8   = $conn->query($query8);
+
+  	if (!$result8) echo "<br><br>UPDATE failed: $query8<br>" .
+      $conn->error . "<br><br>";
+  }
