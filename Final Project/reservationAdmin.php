@@ -16,7 +16,7 @@ body {font-family: "Lato", sans-serif}
   $conn = new mysqli($hn, $un, $pw, $db);
   if ($conn->connect_error) die($conn->connect_error);
 
-  $resultRoom = $conn->query("SELECT * FROM rooms");
+  $resultRoom = $conn->query("SELECT DISTINCT roomType FROM rooms");
 
 
 if (isset($_POST['numGuests'])   &&
@@ -96,7 +96,7 @@ if (isset($_POST['bookingCode'])   &&
     <p class="w3-opacity"><i>Book a room!</i></p>
     <p class="w3-justify">We're here to help you book a room! Input your information and we'll book the room for you right away! Thanks for choosing us for your stay!</p>
 
-  <form action="reservation.php" method="post"><pre>
+  <form action="reservationAdmin.php" method="post"><pre>
       Number of Guests: <input type="text" name="numGuests">
       Check in date:    <input type="text" name="inDate">
       Check out date:   <input type="text" name="outDate">
@@ -111,7 +111,7 @@ if (isset($_POST['bookingCode'])   &&
     <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
       <h2 class="w3-wide w3-center">Check a reservation</h2>
       <p class="w3-opacity w3-center"><i>Input your booking number and name, and we'll let you know the details about your stay!</i></p><br>
-    <form action="reservation.php" method="post"><pre>
+    <form action="reservationAdmin.php" method="post"><pre>
       Booking Code: <input type="text" name="bookingCode">
       Guest Name:   <input type="text" name="guestName2">
                     <input type="submit" value="Search booking">
@@ -136,7 +136,7 @@ if ($result2->num_rows > 0) {
     <h2 class="w3-wide">Spartan Hotels</h2>
     <p class="w3-opacity"><i>Select a room type and we'll show you what is not booked!</i></p>
 
-  <form action="reservation.php" method="post"><pre>
+  <form action="reservationAdmin.php" method="post"><pre>
     Room Type: <select name="roomType">
    <?php
         while($rows=$resultRoom->fetch_assoc())
@@ -175,7 +175,7 @@ if ($result3->num_rows > 0) {
     <div class="w3-modal-content w3-animate-top w3-card-4">
       <header class="w3-container w3-teal w3-center w3-padding-32"> 
         <span onclick="document.getElementById('ticketModal').style.display='none'" 
-       class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+       class="w3-button w3-teal w3-xlarge w3-display-topright">Ã—</span>
         <h2 class="w3-wide"><i class="fa fa-suitcase w3-margin-right"></i>Tickets</h2>
       </header>
       <div class="w3-container">
